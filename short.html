@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Leaflet Map</title>
+    <meta charset="utf-8" />
+    <!-- Leaflet CSS/js -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='libs/lib/leaflet.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='libs/lib/leaflet-routing-machine.css') }}">
+    <style>
+        #demo {
+            width: 100%;
+            height: 100vh;
+        }
+        .popup-content {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo"></div>
+    <script type="text/javascript" src="{{ url_for('static', filename='libs/lib/leaflet.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='libs/lib/leaflet-routing-machine.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+    <script>
+        // Initialize the map
+        var map = L.map('demo').setView([-41.2858, 174.78682], 8);
+        var mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; ' + mapLink,
+            maxZoom: 18,
+        }).addTo(map);
+
+        // Load CSV data
+        fetch('{{ url_for('static', filename='libs/lib/hospitals.csv') }}')
+            .then(response => response.text())
+            .then(csvText => {
+                const data = Papa.parse(csvText, { header: true }).data;
+
+                // Log parsed data to ensure correct parsing
+                console.log(data);
+
+                const geojson = {
+                    type: "FeatureCollection",
+                    features: data.map(point => {
+                        const lat = parseFloat(point.latitude);
+                        const lng = parseFloat(point.longitude);
+
+                        if (isNaN(lat) || isNaN(lng)) {
+                            console.error(`Invalid lat/lng value for point: ${point}`);
+                            return null;
+                        }
+
+                        return {
+                            type: "Feature",
+                            properties: point,
+                            geometry: {
+                                type: "Point",
+                                coordinates: [lng, lat]
+                            }
+                        };
+                    }).filter(feature => feature !== null)
+                };
+
+                // Add GeoJSON layer to the map
+                const geojsonLayer = L.geoJSON(geojson, {
+                    onEachFeature: (feature, layer) => {
+                        layer.bindPopup(createPopupContent(feature.properties));
+                    }
+                }).addTo(map);
+
+                // Zoom to layer
+                if (geojsonLayer.getBounds().isValid()) {
+                    map.fitBounds(geojsonLayer.getBounds());
+                }
+
+                // Custom icons
+                const userIcon = L.icon({
+                    iconUrl: '{{ url_for('static', filename='libs/lib/images/user-marker.png.png') }}', // Path to your custom icon for the user-marked point
+                    iconSize: [50, 75],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+
+                const nearestIcon = L.icon({
+                    iconUrl: '{{ url_for('static', filename='libs/lib/images/nearest-marker.png.png') }}', // Path to your custom icon for the nearest point
+                    iconSize: [70, 50],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+
+                // Handle map click event
+                map.on('click', function(e) {
+                    const clickedLatLng = e.latlng;
+                    findNearestPoint(clickedLatLng, geojson);
+                });
+
+                function showAttributes(properties) {
+                    let content = '<div class="popup-content">';
+                    for (let key in properties) {
+                        content += `<strong>${key}:</strong> ${properties[key]}<br>`;
+                    }
+                    content += '</div>';
+                    L.popup()
+                        .setLatLng(map.getCenter())
+                        .setContent(content)
+                        .openOn(map);
+                }
+
+                function findNearestPoint(clickedLatLng, geojson) {
+                    let nearestPoint = null;
+                    let minDistance = Infinity;
+
+                    geojson.features.forEach(feature => {
+                        const latlng = L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]);
+                        const distance = clickedLatLng.distanceTo(latlng);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            nearestPoint = {
+                                latlng: latlng,
+                                properties: feature.properties
+                            };
+                        }
+                    });
+
+                    if (nearestPoint) {
+                        // Log the nearest point for debugging
+                        console.log("Nearest point:", nearestPoint);
+
+                        // Create start and end markers with popups
+                        L.marker(clickedLatLng, { icon: userIcon })
+                            .bindPopup(createPopupContent({ Start: 'User Location' }))
+                            .addTo(map)
+                            .openPopup();
+
+                        L.marker(nearestPoint.latlng, { icon: nearestIcon })
+                            .bindPopup(createPopupContent(nearestPoint.properties))
+                            .addTo(map)
+                            .openPopup();
+
+                        L.Routing.control({
+                            waypoints: [clickedLatLng, nearestPoint.latlng],
+                            createMarker: function(i, wp, nWps) {
+                                const icon = i === 0 ? userIcon : nearestIcon;
+                                return L.marker(wp.latLng, { icon: icon }).bindPopup(i === 0 ? "Start" : "End");
+                            }
+                        }).addTo(map);
+                    }
+                }
+
+                function createPopupContent(properties) {
+                    let content = '<div class="popup-content">';
+                    for (let key in properties) {
+                        content += `<strong>${key}:</strong> ${properties[key]}<br>`;
+                    }
+                    content += '</div>';
+                    return content;
+                }
+            }).catch(error => {
+                console.error("Error fetching CSV data:", error);
+            });
+    </script>
+</body>
+</html>

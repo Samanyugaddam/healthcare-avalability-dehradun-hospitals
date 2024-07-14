@@ -1,0 +1,1073 @@
+ /* html, */
+
+ @media (max-width: 600px) {
+  #info_btn {
+    position: relative;
+    /* z-index: 500; */
+    top: 5%;
+    left: 4%;
+  }
+
+#legend_btn {
+  position: relative;
+  /* z-index: 600; */
+  bottom: 1%;
+  right: 0%;
+  height: 45px;
+  width:100px;
+}
+
+.btn-integrated {
+  background-color: #98225d; 
+  color: #fff; 
+  border-radius: 5px; 
+  padding: 5px 10px;
+  cursor: pointer; 
+  margin: 10px;
+  width: auto; 
+  height: 15px; 
+  font-size: 8px;
+  
+}
+  
+}
+ body {
+     height: absolute;
+     padding: 0;
+     margin: 0;
+     font-family: arial;
+
+ }
+
+ #map {
+     position: absolute;
+     left: 0%;
+     width: 100%;
+     height: 100%;
+     border-style: solid;
+     border-color: black;
+     border-width: thin;
+	 z-index: 0;
+
+ }
+
+  .map-coordinate {
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px;
+    color: #090808;
+    background-color: rgb(180, 231, 29);
+    border: 1px solid black;
+    border-radius: 5%;
+    margin:5px;
+}
+  
+
+
+ #query_tab {
+     position: absolute;
+     padding: 0.7% 0%;
+     left: 0%;
+     width: 20%;
+     height: auto;
+    border-style: solid;
+     border-color: black;
+     border-width: thin;
+     visibility: hidden;
+     overflow: scroll;
+
+ }
+
+ #legend {
+     z-index: 11;
+     padding: 2px 4px;
+     border: 1px solid grey;
+     position: absolute;
+     bottom: 8%;
+     height: 0%;
+     overflow: scroll;
+     width: 0%;
+     right: 0%;
+     z-index: 999;
+     background-color: #ffffff;
+     font-weight: bold;
+     visibility: hidden;
+
+ }
+
+ #layer {
+     position: relative;
+     width: 70%;
+ }
+
+ #attributes {
+     position: relative;
+     width: 70%;
+ }
+
+ #operator {
+     position: relative;
+     width: 70%;
+ }
+
+ #value {
+     position: relative;
+     width: 70%;
+ }
+
+ #table_data {
+     position: absolute;
+     bottom: 0%;
+     overflow: scroll;
+     left: 0%;
+     right: 0%;
+     height: 0%;
+     border: 1px solid #4CAF50;
+ }
+
+ #table {
+     white-space: nowrap;
+     grid-template-areas: "head-fixed""body-scrollable";
+ }
+
+
+ #table th {
+     position: -webkit-sticky;
+     /* for Safari */
+     position: sticky;
+     top: 0px;
+     background-color: rgb(122, 209, 100);
+ }
+
+ /* #wms_layers_btn {
+     position: absolute;
+     z-index: 600;
+     top: 3%;
+     left: 30%;
+ } */
+
+ #query_panel_btn {
+     position: absolute;
+     z-index: 600; 
+      top: 3%;
+     left: 30%;
+ } 
+
+ #legend_btn {
+     position: absolute;
+     /* z-index: 600; */
+     bottom: 1%;
+     right: 0%;
+ }
+
+#table_wms_layers{
+     white-space: nowrap;
+     grid-template-areas: "head-fixed""body-scrollable";
+ }
+ 
+ #table_wms_layers th {
+     position: -webkit-sticky;
+     /* for Safari */
+     position: sticky;
+     top: 0px;
+     background-color: rgb(122, 209, 100);
+ }
+ /*===== GOOGLE FONTS =====*/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  /* background: url('path/to/your/earth-image.jpg') center center fixed; */
+  background-size: cover;
+  font-family: 'Arial', sans-serif;
+}
+
+.login {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/*===== VARIABLES CSS =====*/
+:root {
+  /*===== Colores =====*/
+  --first-color: #9D4BFF;
+  --first-color-dark: #23004D;
+  --first-color-light: #A49EAC;
+  --first-color-lighten: rgba(242, 242, 242, 0.9); /* Increased transparency */
+
+  /*===== Font and typography =====*/
+  --body-font: 'Open Sans', sans-serif;
+  --h1-font-size: 1.5rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+  }
+}
+
+/*===== BASE =====*/
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  color: var(--first-color-dark);
+}
+
+h1 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/*===== LOGIN =====*/
+.login {
+  display: grid;
+  grid-template-columns: 100%;
+  height: 100vh;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.login__content {
+  display: grid;
+}
+
+.login__img {
+  justify-self: center;
+}
+
+.login__img img {
+  width: 310px;
+  margin-top: 1.5rem;
+}
+
+.login__forms {
+  position: relative;
+  height: 368px;
+}
+
+.login__registre, .login__create {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  background-color: var(--first-color-lighten);
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(35, 0, 77, .2);
+  animation-duration: .4s;
+  animation-name: animate-login;
+}
+
+@keyframes animate-login {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.1, 1.1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.login__title {
+  font-size: var(--h1-font-size);
+  margin-bottom: 2rem;
+}
+
+.login__box {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: .5rem;
+  padding: 1.125rem 1rem;
+  background-color: #FFF;
+  margin-top: 1rem;
+  border-radius: .5rem;
+}
+
+.login__icon {
+  font-size: 1.5rem;
+  color: var(--first-color);
+}
+
+.login__input {
+  border: none;
+  outline: none;
+  font-size: var(--normal-font-size);
+  font-weight: 700;
+  color: var(--first-color-dark);
+}
+
+.login__input::placeholder {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+  color: var(--first-color-light);
+}
+
+.login__forgot {
+  display: block;
+  width: max-content;
+  margin-left: auto;
+  margin-top: .5rem;
+  font-size: var(--small-font-size);
+  font-weight: 600;
+  color: var(--first-color-light);
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+#was
+{
+
+
+text-align:center;
+border-radius:5px;
+/* background: rgba(255,255,0,0.7); */
+position:absolute;
+top:15px;
+left:calc(50% - 300px);
+margin:auto;
+    z-index: 2000;
+/* display: inline-block; */
+
+}
+
+.input.maps input {
+padding: 0 35px;
+}
+
+#places {
+float: left;
+
+width: 500px;
+border: 3px solid #d5eff6;
+-webkit-border-radius: 6px;
+border-radius: 6px;
+background-color: #fff;
+
+}
+
+#map { width: 100%;
+  height: 100%; }
+.info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+.legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+
+.scroler{
+
+width: 250px;
+height: 800px;
+z-index: 999;
+overflow-y: scroll;
+}
+
+.left-inner-addon {
+position: relative;
+}
+.left-inner-addon input {
+padding-left: 30px;    
+}
+.left-inner-addon i {
+position: absolute;
+padding: 10px 12px;
+pointer-events: none;
+}
+
+.login__button {
+  display: block;
+  padding: 1rem;
+  margin: 2rem 0;
+  background-color: var(--first-color);
+  color: #FFF;
+  font-weight: 600;
+  text-align: center;
+  border-radius: .5rem;
+  transition: .3s;
+}
+
+.login__button:hover {
+  background-color: var(--first-color-dark);
+}
+
+.login__account, .login__signin, .login__signup {
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+
+.login__account {
+  color: var(--first-color-dark);
+}
+
+.login__signin, .login__signup {
+  color: var(--first-color);
+  cursor: pointer;
+}
+
+.login__social {
+  margin-top: 2rem;
+}
+
+.login__social-icon {
+  font-size: 1.5rem;
+  color: var(--first-color-dark);
+  margin: 0 1.5rem;
+}
+
+/*Show login*/
+.block {
+  display: block;
+}
+
+/*Hidden login*/
+.none {
+  display: none;
+}
+
+/* ===== MEDIA QUERIES =====*/
+@media screen and (min-width: 576px) {
+  .login__forms {
+    width: 348px;
+    justify-self: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .login {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .login__content {
+    grid-template-columns: repeat(2, max-content);
+    justify-content: center;
+    align-items: center;
+    margin-left: 10rem;
+  }
+
+  .login__img {
+    display: flex;
+    width: 600px;
+    height: 588px;
+    background-color: var(--first-color-lighten);
+    border-radius: 1rem;
+    padding-left: 1rem;
+  }
+
+  .login__img img {
+    width: 390px;
+    margin-top: 0;
+  }
+
+  .login__registre, .login__create {
+    left: -11rem;
+  }
+
+  .login__registre {
+    bottom: -2rem;
+  }
+
+  .login__create {
+    bottom: -5.5rem;
+  }
+}
+
+
+ .modal-dialog {
+     max-width: 60% !important;
+     height: 60% !important;
+     top: 18% !important;
+
+
+ }
+
+ .form-select {
+     left: 0%;
+     width: 85% !important;
+
+ }
+
+ .form-control {
+     left: 0%;
+     width: 85% !important;
+
+ }
+
+ .leaflet-popup-content {
+     width: auto !important;
+ }
+
+ #clear_btn {
+     position: absolute;
+     z-index: 500;
+     top: 1%;
+     left: 50%;
+
+ }
+
+ #info_btn {
+     position: absolute;
+     z-index: 500;
+     top: 1%;
+     left: 60%;
+
+ }
+ #measuretype {
+    position: absolute;
+    z-index: 600;
+    top: 1%;
+    left: 60%;
+    width: 15%;
+}
+/* #button_swipe{
+    position: absolute;
+    z-index: 600;
+    top: 1%;
+    left: 60%;
+    width: 10%;
+
+} */
+
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: arial;
+
+}
+
+#map {
+    position: absolute;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+border-style: solid;
+    border-color: black;
+  border-width: thin;
+
+}
+
+#query_tab {
+    position: absolute;
+    /* padding: .5% 0%; */
+    left: 0%;
+    width: 30%;
+    height: 100%;
+    border-style: solid;
+   border-color: black;
+    border-width: thin;
+    visibility: hidden; 
+   overflow: scroll;
+
+}
+
+#legend {
+    z-index: 11;
+    padding: 2px 4px;
+    border: 1px solid grey;
+    position: absolute;
+    bottom: 7%;
+    height: 0%;
+    overflow: scroll;
+    width: 0%;
+    right: 0%;
+    z-index: 10000;
+    background-color: #ffffff;
+    font-weight: bold;
+    visibility: hidden;
+
+}
+
+#layer {
+    position: relative;
+    width: 85%;
+}
+
+#attributes {
+    position: relative;
+    width: 85%;
+}
+
+#operator {
+    position: relative;
+    width: 85%;
+}
+
+#value {
+    position: relative;
+    width: 85%;
+}
+
+#layer1 {
+    position: relative;
+    width: 85%;
+}
+
+#draw_type {
+    position: relative;
+    width: 85%;
+}
+
+
+#table_data {
+    position: absolute;
+    bottom: 0%;
+    overflow: scroll;
+    left: 0%;
+    right: 0%;
+    height: 0%;
+    border: 1px solid #4CAF50;
+}
+
+#table {
+    white-space: nowrap;
+    grid-template-areas: "head-fixed""body-scrollable";
+}
+
+
+#table th {
+    position: -webkit-sticky;
+    /* for Safari */
+    position: sticky;
+    top: 0px;
+    background-color: rgb(122, 209, 100);
+}
+
+/* #wms_layers_btn {
+    position: absolute;
+    z-index: 600;
+    top: 1%;
+    left: 30%;
+} */
+
+#query_panel_btn {
+    position: absolute;
+    z-index: 600;
+    top: 1%;
+    left: 10%;
+}
+
+#legend_btn {
+    position: absolute;
+    z-index: 600;
+    bottom: 2%;
+    right: 0%;
+}
+
+
+#table_wms_layers {
+    white-space: nowrap;
+    grid-template-areas: "head-fixed""body-scrollable";
+}
+
+#table_wms_layers th {
+    position: -webkit-sticky;
+    /* for Safari */
+    position: sticky;
+    top: 0px;
+    background-color: rgb(122, 209, 100);
+}
+
+
+.modal-dialog {
+    max-width: 60% !important;
+    height: 60% !important;
+    top: 18% !important;
+
+
+}
+
+.form-select {
+    left: 0%;
+    width: 85% !important;
+
+}*
+
+.form-control {
+    left: 0%;
+    width: 85% !important;
+
+}
+
+#clear_btn {
+    position: absolute;
+    z-index: 500;
+    top: 1%;
+    left: 50%;
+
+}
+
+#info_btn {
+    position: absolute;
+    z-index: 500;
+    top: 1%;
+    left: 80%;
+
+}
+
+#measuretype {
+    position: absolute;
+    z-index: 600;
+    top: 1%;
+    left: 60%;
+    width: 15%;
+}
+
+#scale_bar {
+
+    position: absolute;
+    z-index: 500;
+    bottom: 0%;
+    left: 20%;
+}
+
+#scale_bar1 {
+    color: red;
+    font-weight: bold;
+    position: absolute;
+    z-index: 500;
+    top: 22.875em;
+    left: 0.5em;
+
+}
+
+.ol-popup-content {
+
+    max-width: 500px;
+}
+
+.ol-scale-step-text {
+    color: red;
+}
+
+.ol-scale-text {
+    color: red;
+    font-weight: bold;
+}
+
+.layer-switcher.shown {
+    max-height: 465px;
+}
+
+.ol-control button {
+    background-color: rgba(40, 40, 40, 0.8) !important;
+}
+
+.ol-control button:hover {
+    background-color: rgba(40, 40, 40, 1) !important;
+}
+
+.ol-mouse-position {
+    top: 95%;
+    left: 0.5%;
+    position: absolute;
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.ol-zoom-extent {
+    top: 3.8em;
+    left: 0.5em;
+    position: absolute;
+}
+
+.ol-zoomslider {
+    top: 5.8em;
+    left: 0.5em;
+    position: absolute;
+    height: 200px;
+}
+
+.ol-geocoder.gcd-gl-container {
+    top: 21.875em;
+    left: 0.5em;
+    position: absolute;
+}
+
+
+
+.tooltip {
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    color: white;
+    padding: 4px 8px;
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+.tooltip-measure {
+    opacity: 1;
+    font-weight: bold;
+}
+
+.tooltip-static {
+    background-color: #ffcc33;
+    color: black;
+    border: 1px solid white;
+}
+
+.tooltip-measure:before,
+.tooltip-static:before {
+    border-top: 6px solid rgba(0, 0, 0, 0.5);
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    margin-left: -7px;
+    left: 50%;
+}
+
+.tooltip-static:before {
+    border-top-color: #ffcc33;
+}
+
+.full-screen {
+    padding:5px;
+    /* color:  */
+    background-color: #fffdfd;
+    position: absolute;
+    left: 11px;
+    top: 280px;
+}
+
+.button-container {
+    text-align: center; /* Align the button to the center, adjust as needed */
+    margin-top: 20px;
+    padding:15px; /* Add some top margin, adjust as needed */
+}
+
+.box{
+    padding : 5px;
+    border: 2px solid black; /* Add a black border with 2px width */
+    /* padding: 10px; Optional: Add some padding for better appearance */
+    margin: 20px; 
+}
+
+/* .bound {
+    padding: 5px; /* Add padding around the input element */
+    /* margin: 5px 0; Add margin above and below the input element
+  } */ 
+
+.btn-integrated {
+    background-color: #98225d; /* Primary button color, change as needed */
+    color: #fff; /* Text color, change as needed */
+    border-radius: 5px; /* Remove button border */
+    padding: 5px 10px; /* Adjust padding as needed */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    margin: 13px;
+    width: auto; /* Set the desired width */
+    height: 35px; /* Set the desired height */
+    font-size: 14px;
+    
+}
+
+.btn-integrated:hover {
+    background-color: #e91a1a; /* Change the color on hover, if desired */
+}
+
+/* Adjust the style of Leaflet Locate Control */
+.leaflet-control-locate {
+    background-color: #fff; /* Background color */
+    border: 2px solid #007bff; /* Border color */
+    border-radius: 5px; /* Border radius */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Box shadow */
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.leaflet-control-locate a {
+    display: block;
+    width: 30px; /* Adjust the width */
+    height: 30px; /* Adjust the height */
+    line-height: 30px;
+    text-align: center;
+    color: #007bff; /* Icon color */
+    text-decoration: none;
+    font-size: 18px; /* Adjust the font size */
+}
+
+.leaflet-control-locate a:hover {
+    background-color: #007bff; /* Hover background color */
+    color: #fff; /* Hover text color */
+}
+
+
+.btn-custom {
+    display: inline-block;
+    padding: 15px 25px; /* Adjust padding as needed */
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+}
+
+/* Style for the integrated button */
+.btn-integrated {
+    background-color: #007BFF;
+    align-items: center;
+    
+}
+
+#routingWindow {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background-color: white;
+    padding: 20px;
+    z-index: 1000;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#routingWindow p {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#routingWindow label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#routingWindow input {
+    width: calc(100% - 12px); /* Adjust width based on your preference */
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+#routingWindow button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#routingWindow button:hover {
+    background-color: #45a049;
+}
+
+.closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+#charts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+canvas {
+    max-width: 100%;
+    max-height: 400px;
+}
+
+#analyticsControls {
+    margin-top: 10px;
+}
+
+button {
+    font-size: 14px;
+    margin: 5px;
+    padding: 8px;
+}
+
+select {
+    font-size: 14px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 16px;
+}
+
+#dataTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#dataTable, #dataTable th, #dataTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#dataTable th {
+    background-color: #f2f2f2;
+}
+#analyticsWindow {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 400px;
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow: hidden;
+    display: none;
+}
+
+#analyticsHeader {
+    background-color: #f2f2f2;
+    padding: 8px;
+    cursor: move;
+    user-select: none;
+}
+
+#analyticsContent {
+    padding: 15px;
+}
+
+/* Close button style */
+#closeButton {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
